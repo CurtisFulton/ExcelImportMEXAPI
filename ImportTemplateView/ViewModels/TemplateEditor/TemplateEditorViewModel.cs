@@ -36,7 +36,7 @@ namespace ImportTemplateView
             
             if (!Directory.Exists(TemplateFolderLocation)) 
                 Directory.CreateDirectory(TemplateFolderLocation);
-            
+
             AllTemplates = GetAllTemplates();
         }
 

@@ -15,46 +15,34 @@
         </Grid.RowDefinitions>
 
         <!-- The Grid that holds the Template Information -->
-        <DataGrid x:Name="TemplateGrid" AutoGenerateColumns="False" HeadersVisibility="Column"
-                  ItemsSource="{Binding SelectedTemplate.TemplateColumns}" CanUserAddRows="False"
-                  AlternationCount="2" AlternatingRowBackground="LightGray" GridLinesVisibility="None"
-                  MinRowHeight="30">
-            
-            <!-- Set the Styles for the Column Headers -->
-            <DataGrid.ColumnHeaderStyle>
-                <Style TargetType="{x:Type DataGridColumnHeader}">
-                    <Setter Property="Background" Value="LightGray" />
-
-                    <Setter Property="MinHeight" Value="35" />
-                    <Setter Property="Padding" Value="10 4 10 7" />
-
-                    <Setter Property="VerticalContentAlignment" Value="Center" />
-                    <Setter Property="BorderThickness" Value="0 0 1 1" />
-                    <Setter Property="BorderBrush" Value="Black" />
-                </Style>
-            </DataGrid.ColumnHeaderStyle>
-
-            <!-- Set the Styles for individual Cells -->
-            <DataGrid.CellStyle>
-                <Style TargetType="{x:Type DataGridCell}">
-                    <Setter Property="VerticalAlignment" Value="Center"/>
-                </Style>
-            </DataGrid.CellStyle>
-
-            <!-- Create the columns -->
+        <DataGrid x:Name="TemplateDataGrid"  ItemsSource="{Binding SelectedTemplate.TemplateColumns}">
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Property Name">
+                <!-- Property Column -->
+                <DataGridTemplateColumn Header="Property Name" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding PropertyName}" Height="30" VerticalContentAlignment="Center"></TextBox>
+                            <TextBox Text="{Binding PropertyName}" Height="30" VerticalContentAlignment="Center">
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox">
+                                        <Setter Property="Background" Value="Transparent"></Setter>
+                                        <Setter Property="BorderThickness" Value="0"></Setter>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
+
+                    <DataGridTemplateColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="IsEnabled" Value="{Binding IsRequired, Converter={StaticResource InvertBoolConverter}}"></Setter>
+                        </Style>
+                    </DataGridTemplateColumn.CellStyle>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="ColumnName" Width="*" Binding="{Binding ColumnName}"/>
+
+                <DataGridTextColumn Header="ColumnName" Width="*" Binding="{Binding ColumnName}" />
                 <DataGridCheckBoxColumn Header="Mandatory" Width="auto" Binding="{Binding IsMandatory}"/>
             </DataGrid.Columns>
         </DataGrid>
-
 
         <!-- Create the buttons in the footer for Add/Save/Remove -->
         <Border Grid.Row="1" BorderThickness="1 0 1 1" BorderBrush="DimGray">

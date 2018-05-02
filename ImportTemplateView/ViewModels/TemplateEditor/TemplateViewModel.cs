@@ -50,7 +50,8 @@ namespace ImportTemplateView
                 TemplateColumns.Add(new TemplateColumn() {
                     IsRequired = true,
                     IsMandatory = true,
-                    PropertyName = prop.Name
+                    PropertyName = prop.Name,
+                    ColumnName = prop.Name
                 });
             }
         }

@@ -46,7 +46,7 @@
                     <ComboBox x:Name="TemplateSelector" Grid.Column="0" Margin="0 0 10 0" DisplayMemberPath="TemplateName" 
                           ItemsSource="{Binding TemplateEditorViewModel.AllTemplates}" 
                           SelectedItem="{Binding TemplateEditorViewModel.SelectedTemplate, Mode=TwoWay}"
-                          VerticalContentAlignment="Center">
+                          VerticalContentAlignment="Center" IsEditable="True">
 
                         <ComboBox.ItemContainerStyle>
                             <Style TargetType="{x:Type ComboBoxItem}">
@@ -60,7 +60,7 @@
             </Grid>
 
             <!-- Body -->
-            <TabControl x:Name="TabControl" Grid.Row="1">
+            <TabControl x:Name="TabControl" Grid.Row="1" SelectedIndex="1">
                 <TabItem x:Name="ExcelImport" Header="Test" TabIndex="0">
                     <local:TemplateEditorView DataContext="{Binding TemplateEditorViewModel}"/>
                 </TabItem>
