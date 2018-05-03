@@ -21,14 +21,16 @@
                 <DataGridTemplateColumn Header="Property Name" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding PropertyName}" Height="30" VerticalContentAlignment="Center">
-                                <TextBox.Style>
-                                    <Style TargetType="TextBox">
+                            <ComboBox SelectedItem="{Binding PropertyName, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Height="30" VerticalContentAlignment="Center" 
+                                      ItemsSource="{Binding Path=DataContext.SelectedTemplate.PropertyNames,
+                                                    RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Mode=TwoWay}">
+                                <ComboBox.Style>
+                                    <Style TargetType="ComboBox">
                                         <Setter Property="Background" Value="Transparent"></Setter>
                                         <Setter Property="BorderThickness" Value="0"></Setter>
                                     </Style>
-                                </TextBox.Style>
-                            </TextBox>
+                                </ComboBox.Style>
+                            </ComboBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
 
@@ -39,8 +41,32 @@
                     </DataGridTemplateColumn.CellStyle>
                 </DataGridTemplateColumn>
 
-                <DataGridTextColumn Header="ColumnName" Width="*" Binding="{Binding ColumnName}" />
-                <DataGridCheckBoxColumn Header="Mandatory" Width="auto" Binding="{Binding IsMandatory}"/>
+                <!-- Column Name Column -->
+                <DataGridTemplateColumn Header="Column Name" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding ColumnName, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Height="30" VerticalContentAlignment="Center">
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox">
+                                        <Setter Property="Background" Value="Transparent"></Setter>
+                                        <Setter Property="BorderThickness" Value="0"></Setter>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridCheckBoxColumn Header="Mandatory" Width="auto" Binding="{Binding IsMandatory}">
+                    <DataGridCheckBoxColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="IsEnabled" Value="{Binding IsRequired, Converter={StaticResource InvertBoolConverter}}"/>
+                            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+                            <Setter Property="MinHeight" Value="32"></Setter>
+                        </Style>
+                    </DataGridCheckBoxColumn.CellStyle>
+                </DataGridCheckBoxColumn>
             </DataGrid.Columns>
         </DataGrid>
 
@@ -48,7 +74,6 @@
         <Border Grid.Row="1" BorderThickness="1 0 1 1" BorderBrush="DimGray">
             <Grid Background="LightGray">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
@@ -60,10 +85,7 @@
                 <Button Content="Save" Grid.Column="1" Margin="5" IsEnabled="True" 
                         Command="{Binding SaveCurrentTemplateCommand}"/>
                 
-                <Button Content="Back to Importer" Grid.Column="2" Margin="5" IsEnabled="True"
-                        Click="OnBackButtonClicked"></Button>
-                
-                <Button Content="Remove Row" Grid.Column="3" Margin="5" IsEnabled="True"
+                <Button Content="Remove Row" Grid.Column="2" Margin="5" IsEnabled="True"
                         Command="{Binding RemoveColumnCommand}"></Button>
             </Grid>
         </Border>

@@ -60,14 +60,15 @@
             </Grid>
 
             <!-- Body -->
-            <TabControl x:Name="TabControl" Grid.Row="1" SelectedIndex="1">
-                <TabItem x:Name="ExcelImport" Header="Test" TabIndex="0">
-                    <local:TemplateEditorView DataContext="{Binding TemplateEditorViewModel}"/>
-                </TabItem>
-                <TabItem x:Name="TemplateEditor" Header="Test2" TabIndex="1">
-                    <local:ExcelImporterView />
-                </TabItem>
-            </TabControl>
+            <Grid Grid.Row="1" Margin="0 20 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <local:ExcelImporterView Grid.Column="0" />
+                <local:TemplateEditorView Grid.Column="1" DataContext="{Binding TemplateEditorViewModel}"/>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

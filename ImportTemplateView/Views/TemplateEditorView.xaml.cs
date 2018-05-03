@@ -44,12 +44,5 @@ namespace ImportTemplateView
             cellStyle.Setters.Add(new Setter(DataGridCell.VerticalAlignmentProperty, VerticalAlignment.Center));
             TemplateDataGrid.CellStyle = cellStyle;
         }
-
-        private void OnBackButtonClicked(object sender, RoutedEventArgs e)
-        {
-            TabControl tabControl = (TabControl)((TabItem)this.Parent).Parent;
-
-            tabControl.SelectedIndex = 1; 
-        }
     }
 }

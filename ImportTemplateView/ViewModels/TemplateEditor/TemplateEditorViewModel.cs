@@ -88,6 +88,9 @@ namespace ImportTemplateView
 
         private void SaveCurrentTemplateToJSON()
         {
+            if (SelectedTemplate == null)
+                return;
+
             string templateString = JsonConvert.SerializeObject(SelectedTemplate, Formatting.Indented);
 
             File.WriteAllText(Path.Combine(TemplateFolderLocation, SelectedTemplate.TemplateName + ".json"), templateString);

@@ -57,7 +57,7 @@ namespace ImportTemplateView
         }
     }
 
-    public struct TemplateColumn
+    public class TemplateColumn : BaseViewModel
     {
         public bool IsMandatory { get; set; }
         public bool IsRequired { get; set; }

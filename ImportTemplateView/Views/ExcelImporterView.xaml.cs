@@ -11,12 +11,5 @@ namespace ImportTemplateView
         {
             InitializeComponent();
         }
-
-        private void OnButtonClicked(object sender, System.Windows.RoutedEventArgs e)
-        {
-            TabControl tabControl = (TabControl)((TabItem)this.Parent).Parent;
-
-            tabControl.SelectedIndex = 0;
-        }
     }
 }

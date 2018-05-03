@@ -13,15 +13,6 @@ namespace ImportTemplateView
             InitializeComponent();
 
             DataContext = new MainWindowViewModel();
-            SetStyles();
-        }
-
-        private void SetStyles()
-        {
-            // Hide the tab item headers
-            Style tabStyle = new Style();
-            tabStyle.Setters.Add(new Setter(UIElement.VisibilityProperty, Visibility.Collapsed));
-            TabControl.ItemContainerStyle = tabStyle;
         }
     }
 }
